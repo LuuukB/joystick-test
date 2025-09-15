@@ -4,6 +4,19 @@
     water_level: 0.5
     tank_position_x: 0
     tank_position_y: 0
+    canvas:
+        Color:
+            rgba: 0.2, 0.2, 0.2, 1.0
+        Rectangle:
+            id: tank_outline
+            pos: root.center_x - root.width // 2, root.center_y - root.height // 2
+            size: root.width, root.height
+        Color:
+            rgba: 1.1,1.1,0.0,1.0
+        rectangle:
+            id: water
+            pos: root.center_x - root.width // 2 + 5, root.center_y - root.height // 2
+            size: root.width - 10, root.height * root.water_level
     BoxLayout:
         orientation: "vertical"
         padding: 10
@@ -19,16 +32,4 @@
             max: 100
             value: root.percent
             on_value: root.set_percent(self.value)
-    canvas:
-        Color:
-            rgba: 0.2, 0.2, 0.2, 1.0
-        Rectangle:
-            id: tank_outline
-            pos: root.center_x - root.width // 2, root.center_y - root.height // 2
-            size: root.width, root.height
-        Color:
-            rgba: 1.1,1.1,0.0,1.0
-        rectangle:
-            id: water
-            pos: root.center_x - root.width // 2 + 5, root.center_y - root.height // 2
-            size: root.width - 10, root.height * root.water_level
+
