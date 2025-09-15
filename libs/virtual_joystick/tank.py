@@ -22,8 +22,8 @@ class VirtualTankWidget(Widget):
         Builder.load_file(os.path.join(os.path.dirname(__file__), "res/tank.kv"))
 
     def set_percent(self, nieuw: float):
-        percent = nieuw
-        print(percent)
+        self.percent = nieuw
+        print(self.percent)
 
     def adjust_water(self, level: float) -> None:
         self.level = level
