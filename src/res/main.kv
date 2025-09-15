@@ -24,6 +24,58 @@ RelativeLayout:
             source: "assets/back_button_normal.png" if self.parent.state == "normal" else "assets/back_button_down.png"
             pos: self.parent.pos
             size: self.parent.size
-
+    BoxLayout:
+        orientation: 'horizontal'
+        BoxLayout:
+            size_hint_x: 0.3
+            orientation: 'vertical'
+            Widget:
+                size_hint_y: 2.0
+            Label:
+                text: "Amiga State:"
+                font_size: 18
+                size_hint_y: 0.5
+            Label:
+                text: app.amiga_state
+                font_size: 18
+            Widget: # Empty placeholder
+            Label:
+                text: "Speed [m/s]:"
+                font_size: 18
+                size_hint_y: 0.5
+            Label:
+                text: app.amiga_speed
+                font_size: 18
+            Widget: # Empty placeholder
+            Label:
+                text: "Angular Rate [rad/s]:"
+                font_size: 18
+                size_hint_y: 0.5
+            Label:
+                text: app.amiga_rate
+                font_size: 18
+            Widget:
+                size_hint_y: 2.0
+        VirtualJoystickWidget:
+            id: joystick
+        TabbedPanel:
+            do_default_tab: False
+            id: tab_root
+            TabbedPanelItem:
+                text: "rgb"
+                Image:
+                    id: rgb
+            TabbedPanelItem:
+                text: "disparity"
+                Image:
+                    id: disparity
+            TabbedPanelItem:
+                text: "left"
+                Image:
+                    id: left
+            TabbedPanelItem:
+                text: "right"
+                Image:
+                    id: right
         VirtualTankWidget:
             id: tank
