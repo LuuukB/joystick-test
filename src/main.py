@@ -19,6 +19,7 @@ from farm_ng.core.events_file_reader import proto_from_json_file
 from farm_ng.core.uri_pb2 import Uri
 from turbojpeg import TurboJPEG
 from virtual_joystick.joystick import VirtualJoystickWidget
+from virtual_joystick.tank import VirtualTankWidget
 
 # Must come before kivy imports
 os.environ["KIVY_NO_ARGS"] = "1"
