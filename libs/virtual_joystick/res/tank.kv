@@ -20,13 +20,11 @@
     AnchorLayout:
         anchor_x: "center"
         anchor_y: "center"
-        BoxLayout:               # dit is jouw eigen box die nu mooi in het midden zit
+        BoxLayout:
             orientation: "vertical"
             padding: 10
             spacing: 10
-            size_hint: None, None   # belangrijk: anders vult hij het hele scherm
-            width: 150
-            height: 100
+            size_hint: 0.6, 0.3
 
             Label:
                 id: percent_label
