@@ -4,6 +4,21 @@
     water_level: 0.5
     tank_position_x: 0
     tank_position_y: 0
+    BoxLayout:
+        orientation: "vertical"
+        padding: 10
+        spacing: 10
+
+        Label:
+            id: percent_label
+            text: "{:.0f}%".format(root.percent)
+            font_size: "40sp"
+
+        Slider:
+            min: 0
+            max: 100
+            value: root.percent
+            on_value: root.set_percent(self.value)
     canvas:
         Color:
             rgba: 0.2, 0.2, 0.2, 1.0
@@ -11,17 +26,6 @@
             id: tank_outline
             pos: root.center_x - root.width // 2, root.center_y - root.height // 2
             size: root.width, root.height
-        Label:
-            id: percent_label
-            text: "{:.0f}%".format(root.percent)
-            font_size: "40sp"
-            size_hint_y: None
-            height: self.texture_size[1] + 20
-        Slider:
-            min: 0
-            max: 100
-            value: root.percent
-            on_value: root.set_percent(self.value)
         Color:
             rgba: 1.1,1.1,0.0,1.0
         rectangle:
