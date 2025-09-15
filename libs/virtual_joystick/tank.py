@@ -27,7 +27,7 @@ class VirtualTankWidget(Widget):
 
     def adjust_water(self, level: float) -> None:
         self.level = level
-        self.percent = level * 100
+        self.percent = level
 
     def draw_water(self, dt: float):
         self.water_level = self.level
