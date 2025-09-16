@@ -17,28 +17,25 @@
             id: water
             pos: root.center_x - root.width // 2 + 5, root.center_y - root.height // 2
             size: root.width - 10, root.height * root.water_level
-    AnchorLayout:
-        anchor_x: "center"
-        anchor_y: "center"
-        BoxLayout:
-            orientation: "vertical"
-            padding: 10
-            spacing: 10
-            size_hint: 0.6, 0.3
-            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+    BoxLayout:
+       orientation: "vertical"
+       padding: 10
+       spacing: 10
+       size_hint: 0.6, 0.3
+       pos_hint: {"center_x": 0.5, "center_y": 0.5}
 
-            Label:
-                id: percent_label
-                text: "{:.0f}%".format(root.percent)
-                font_size: "40sp"
-                halign: "center"
-                valign: "middle"
-                text_size: self.size
+       Label:
+           id: percent_label
+           text: "{:.0f}%".format(root.percent)
+           font_size: "40sp"
+           halign: "center"
+           valign: "middle"
+           text_size: self.size
 
-            Slider:
-                min: 0
-                max: 100
-                value: root.percent
-                on_value: root.adjust_water(self.value)
+       Slider:
+           min: 0
+           max: 100
+           value: root.percent
+           on_value: root.adjust_water(self.value)
 
 
