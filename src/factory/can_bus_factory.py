@@ -1,9 +1,10 @@
-class ServiceFactory:
+class CanBusFactory:
     @staticmethod
-    def create(robot_online, config):
-        if robot_online:
+    def create_online(config):
             from ..can.can_handler import CanHandler
             return CanHandler(config)
-        else:
-            from  ..can.mock_can_handler import MockCanHandler
-            return MockCanHandler()
+
+    @staticmethod
+    def create_offline():
+        from ..can.mock_can_handler import MockCanHandler
+        return MockCanHandler()

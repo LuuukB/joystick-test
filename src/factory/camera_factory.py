@@ -3,8 +3,6 @@ import asyncio
 from pathlib import Path
 from typing import Dict
 from ..camera.i_camera_handler  import ICameraHandler
-from ..camera.camera_handler import CameraHandler
-from ..camera.offline_camera_handler import OfflineCameraHandler
 
 class CameraFactory:
     """Factory en manager voor meerdere camera's tegelijk."""
@@ -12,13 +10,15 @@ class CameraFactory:
     def __init__(self):
         self.cameras: Dict[str, ICameraHandler] = {}
 
-    def add_camera(self, name: str, robot_online : bool, source: str = None, stream_name: str = "rgb"):
-        """Voeg een camera toe aan de factory."""
-        if robot_online:
-            cam = CameraHandler(Path(source), stream_name)
-        else:
-            cam = OfflineCameraHandler(source)
-        self.cameras[name] = cam
+    def add_camera_online(self, name: str,path : Path, stream_name: str = "rgb"):
+        """Voeg een realtime camera aan de factory."""
+        from ..camera.camera_handler import CameraHandler
+        self.cameras[name] = CameraHandler(Path(path), stream_name)
+
+    def add_camera_offline(self, name: str, source: str = None):
+        """Voeg een offline camera aan de factory."""
+        from ..camera.offline_camera_handler import OfflineCameraHandler
+        self.cameras[name] = OfflineCameraHandler(source)
 
     def get_camera(self, name: str) -> ICameraHandler:
         return self.cameras[name]
