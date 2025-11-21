@@ -115,10 +115,10 @@ class KivyVirtualJoystick(App):
             raise RuntimeError(f"No {config} service config in {self.service_config}")
 
         # Camera task
-        #self.tasks: list[asyncio.Task] = [
+        self.tasks: list[asyncio.Task] = [
         #    asyncio.create_task(self.stream_camera(oak0_client, view_name))
         #    for view_name in self.STREAM_NAMES
-        #]
+        ]
 
         self.tasks.append(asyncio.create_task(self.pose_generator(canbus_client)))
 
