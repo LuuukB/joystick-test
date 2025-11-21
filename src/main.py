@@ -20,6 +20,7 @@ from farm_ng.core.uri_pb2 import Uri
 from turbojpeg import TurboJPEG
 from virtual_joystick.joystick import VirtualJoystickWidget
 from virtual_joystick.tank import VirtualTankWidget
+from driver.drive_handler import DriveHandler
 
 # Must come before kivy imports
 os.environ["KIVY_NO_ARGS"] = "1"
@@ -114,10 +115,10 @@ class KivyVirtualJoystick(App):
             raise RuntimeError(f"No {config} service config in {self.service_config}")
 
         # Camera task
-        self.tasks: list[asyncio.Task] = [
-            asyncio.create_task(self.stream_camera(oak0_client, view_name))
-            for view_name in self.STREAM_NAMES
-        ]
+        #self.tasks: list[asyncio.Task] = [
+        #    asyncio.create_task(self.stream_camera(oak0_client, view_name))
+        #    for view_name in self.STREAM_NAMES
+        #]
 
         self.tasks.append(asyncio.create_task(self.pose_generator(canbus_client)))
 
@@ -175,18 +176,17 @@ class KivyVirtualJoystick(App):
 
         rate = canbus_client.config.subscriptions[0].every_n
 
-        #async for event, payload in canbus_client.subscribe(
-        #    SubscribeRequest(uri=Uri(path="/state"), every_n=rate),
-        #    decode=False,
-        #):
-        while True:
-            #message = payload_to_protobuf(event, payload)
-            #tpdo1 = AmigaTpdo1.from_proto(message.amiga_tpdo1)
+        async for event, payload in canbus_client.subscribe(
+            SubscribeRequest(uri=Uri(path="/state"), every_n=rate),
+            decode=False,
+        ):
+            message = payload_to_protobuf(event, payload)
+            tpdo1 = AmigaTpdo1.from_proto(message.amiga_tpdo1)
 
             twist.linear_velocity_x = self.max_speed * joystick.joystick_pose.y
             twist.angular_velocity = self.max_angular_rate * -joystick.joystick_pose.x
 
-            #self.amiga_state = tpdo1.state.name
+            self.amiga_state = tpdo1.state.name
             self.amiga_speed = "{:.4f}".format(twist.linear_velocity_x)
             self.amiga_rate = "{:.4f}".format(twist.angular_velocity)
 
