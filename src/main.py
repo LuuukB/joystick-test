@@ -186,9 +186,9 @@ class KivyVirtualJoystick(App):
             twist.linear_velocity_x = self.max_speed * joystick.joystick_pose.y
             twist.angular_velocity = self.max_angular_rate * -joystick.joystick_pose.x
 
-            self.amiga_state = tpdo1.state.name
-            self.amiga_speed = "{:.4f}".format(twist.linear_velocity_x)
-            self.amiga_rate = "{:.4f}".format(twist.angular_velocity)
+            #self.amiga_state = tpdo1.state.name
+            #self.amiga_speed = "{:.4f}".format(twist.linear_velocity_x)
+            #self.amiga_rate = "{:.4f}".format(twist.angular_velocity)
 
             await canbus_client.request_reply("/twist", twist)
             await asyncio.sleep(period)
