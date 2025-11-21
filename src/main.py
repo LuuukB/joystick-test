@@ -170,28 +170,28 @@ class KivyVirtualJoystick(App):
         while self.root is None:
             await asyncio.sleep(0.01)
 
-        twist = Twist2d()
+        #twist = Twist2d()
 
         joystick: VirtualJoystickWidget = self.root.ids["joystick"]
 
-        rate = canbus_client.config.subscriptions[0].every_n
-
-        async for event, payload in canbus_client.subscribe(
-            SubscribeRequest(uri=Uri(path="/state"), every_n=rate),
-            decode=False,
-        ):
-            message = payload_to_protobuf(event, payload)
-            tpdo1 = AmigaTpdo1.from_proto(message.amiga_tpdo1)
-
-            twist.linear_velocity_x = self.max_speed * joystick.joystick_pose.y
-            twist.angular_velocity = self.max_angular_rate * -joystick.joystick_pose.x
-
-            #self.amiga_state = tpdo1.state.name
-            #self.amiga_speed = "{:.4f}".format(twist.linear_velocity_x)
-            #self.amiga_rate = "{:.4f}".format(twist.angular_velocity)
-
-            await canbus_client.request_reply("/twist", twist)
-            await asyncio.sleep(period)
+        #rate = canbus_client.config.subscriptions[0].every_n
+#
+        #async for event, payload in canbus_client.subscribe(
+        #    SubscribeRequest(uri=Uri(path="/state"), every_n=rate),
+        #    decode=False,
+        #):
+        #    message = payload_to_protobuf(event, payload)
+        #    tpdo1 = AmigaTpdo1.from_proto(message.amiga_tpdo1)
+#
+        #    twist.linear_velocity_x = self.max_speed * joystick.joystick_pose.y
+        #    twist.angular_velocity = self.max_angular_rate * -joystick.joystick_pose.x
+#
+        #    #self.amiga_state = tpdo1.state.name
+        #    #self.amiga_speed = "{:.4f}".format(twist.linear_velocity_x)
+        #    #self.amiga_rate = "{:.4f}".format(twist.angular_velocity)
+#
+        #    await canbus_client.request_reply("/twist", twist)
+        #    await asyncio.sleep(period)
 
 
 if __name__ == "__main__":
